@@ -78,10 +78,7 @@ module PDFToImage
 
         def resolution(resolution)
             @resolution = resolution
-        end
-
-        def method_missing(*args)
-            puts "method_missing with #{args.inspect}"
+            self
         end
 
       private
