@@ -76,6 +76,10 @@ module PDFToImage
             end
         end
 
+        def set_resolution(resolution)
+            @resolution = resolution
+        end
+
       private
 
         def generate_temp_file
