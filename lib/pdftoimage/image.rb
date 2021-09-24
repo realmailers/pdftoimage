@@ -76,7 +76,7 @@ module PDFToImage
             end
         end
 
-        def set_resolution(resolution)
+        def resolution(resolution)
             @resolution = resolution
         end
 
