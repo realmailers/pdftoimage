@@ -80,6 +80,10 @@ module PDFToImage
             @resolution = resolution
         end
 
+        def method_missing(*args)
+            puts "method_missing with #{args.inspect}"
+        end
+
       private
 
         def generate_temp_file
