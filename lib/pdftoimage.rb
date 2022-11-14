@@ -91,7 +91,7 @@ module PDFToImage
         end
 
         def page_count(filename)
-            cmd = "pdfinfo #{filename} | grep Pages"
+            cmd = "pdfinfo #{filename}"
             output = exec(cmd)
             matches = /^Pages:.*?(\d+)$/.match(output)
             if matches.nil?
