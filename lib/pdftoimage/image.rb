@@ -29,7 +29,7 @@ module PDFToImage
         # @param pdf_name [String] The name of the PDF
         # @param filename [String] The name of the image for the specified page
         # @param page [Integer] The page number of the PDF
-        # @param page_size [Hash] Hash containing width and height dimensions of the page
+        # @param page_size [Hash] Hash containing resolution, width and height dimensions of the page
         # @param page_count [integer] The number of pages in the PDF
         #
         def initialize(pdf_name, filename, page, page_size, page_count)
@@ -40,6 +40,7 @@ module PDFToImage
             @opened = false
             @width = page_size[:width]
             @height = page_size[:height]
+            @resolution = page_size[:resolution] || 300
             @page_count = page_count
 
             @page = page
@@ -75,11 +76,16 @@ module PDFToImage
             end
         end
 
+        def resolution(resolution)
+            @resolution = resolution
+            self
+        end
+
       private
 
         def generate_temp_file
             if @opened == false
-                cmd = "pdftoppm -png -f #{@page} -l #{@page} #{@pdf_name} #{@filename}"
+                cmd = "pdftoppm -png -r #{@resolution} -f #{@page} -l #{@page} #{@pdf_name} #{@filename}"
                 PDFToImage.exec(cmd)
                 @filename = "#{@filename}-#{page_suffix}.png"
                 @opened = true
