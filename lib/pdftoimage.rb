@@ -73,7 +73,7 @@ module PDFToImage
         private
 
         def page_size(filename, page)
-            cmd = "pdfinfo -f #{page} -l #{page} #{filename} | grep Page"
+            cmd = "pdfinfo -f #{page} -l #{page} #{filename} | grep -a Page"
             output = exec(cmd)
 
             matches = /^Page.*?size:.*?(\d+).*?(\d+)/.match(output)
@@ -91,7 +91,7 @@ module PDFToImage
         end
 
         def page_count(filename)
-            cmd = "pdfinfo #{filename}"
+            cmd = "pdfinfo #{filename} | grep -a Pages"
             output = exec(cmd)
             matches = /^Pages:.*?(\d+)$/.match(output)
             if matches.nil?
